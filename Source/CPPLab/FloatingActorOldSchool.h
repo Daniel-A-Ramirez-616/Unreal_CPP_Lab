@@ -4,19 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "FloatingActor.generated.h"
+#include "FloatingActorOldSchool.generated.h"
 
 UCLASS()
-class CPPLAB_API AFloatingActor : public AActor
+class CPPLAB_API AFloatingActorOldSchool : public AActor
 {
 	GENERATED_BODY()
-
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* VisualMesh;
 	
 public:	
 	// Sets default values for this actor's properties
-	AFloatingActor();
+	AFloatingActorOldSchool();
 
 protected:
 	// Called when the game starts or when spawned

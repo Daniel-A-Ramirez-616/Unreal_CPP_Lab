@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "FloatingActor.h"
+#include "FloatingActorOldSchool.h"
 
 // Sets default values
-AFloatingActor::AFloatingActor()
+AFloatingActorOldSchool::AFloatingActorOldSchool()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -23,14 +23,14 @@ AFloatingActor::AFloatingActor()
 }
 
 // Called when the game starts or when spawned
-void AFloatingActor::BeginPlay()
+void AFloatingActorOldSchool::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AFloatingActor::Tick(float DeltaTime)
+void AFloatingActorOldSchool::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
