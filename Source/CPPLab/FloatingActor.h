@@ -10,6 +10,9 @@ UCLASS()
 class CPPLAB_API AFloatingActor : public AActor
 {
 	GENERATED_BODY()
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* VisualMesh;
 	
 public:	
 	// Sets default values for this actor's properties
