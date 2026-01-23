@@ -23,4 +23,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Default")
+	USceneComponent* DefaultSceneRoot;
 };
