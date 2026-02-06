@@ -24,11 +24,22 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere);
+	int32 CountdownTime = 10;
 
-	int32 CountdownTime = 0;
+	int32 CountdownTimer = 0;
 
 	UTextRenderComponent* CountdownText;
 
 	void UpdateTimerDisplay();
+
+
+	void AdvanceTimer();
+
+	void CountdownHasFinished();
+
+	FTimerHandle CountdownTimerHandle;
+
+
 
 };

@@ -12,7 +12,7 @@ ACountdown::ACountdown()
 	CountdownText->SetHorizontalAlignment(EHTA_Center);
 	CountdownText->SetWorldSize(150.0f);
 	RootComponent = CountdownText;
-	CountdownTime = 3;
+	CountdownTimer = CountdownTime;
 }
 
 // Called when the game starts or when spawned
@@ -20,6 +20,9 @@ void ACountdown::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	UpdateTimerDisplay();
+	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ACountdown::AdvanceTimer, 1.0f, true);
+
 }
 
 // Called every frame
@@ -32,8 +35,26 @@ void ACountdown::Tick(float DeltaTime)
 
 void ACountdown::UpdateTimerDisplay()
 {
-	int32 DisplayNumber = FMath::Max(CountdownTime, 0)
-	FText Output = FText::FromString(FString::FromInt(DisplayNumber) );
-	CountdownText->SetText(output)
+	int32 DisplayNumber = FMath::Max(CountdownTimer, 0);
+	FText output = FText::FromString(FString::FromInt(DisplayNumber));
+	CountdownText->SetText(output);
 }
 
+
+void ACountdown::AdvanceTimer()
+{
+	CountdownTimer--;
+	UpdateTimerDisplay();
+	if (CountdownTimer < 1)
+	{
+		//We're done counting down, so stop running the timer.
+		GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
+		CountdownHasFinished();
+	}
+}
+
+void ACountdown::CountdownHasFinished()
+{
+	FText output = FText::FromString("DONE!");
+	CountdownText->SetText(output);
+}
