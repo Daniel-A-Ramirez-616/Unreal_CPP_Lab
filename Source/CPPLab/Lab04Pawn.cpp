@@ -6,9 +6,15 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Kismet/GameplayStatics.h"
+
 
 void ALab04Pawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
+
+	holder = (ARobotHolder*)UGameplayStatics::GetActorOfClass(GetWorld(), ARobotHolder::StaticClass());
+
+
 
 	ACPPLabCharacter::SetupPlayerInputComponent(PlayerInputComponent);
 	
@@ -46,22 +52,59 @@ void ALab04Pawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void ALab04Pawn::SelectPawn1()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Select Pawn 1"));
+
+	AController* pc = this->GetController();
+	if (pc == nullptr)
+	{
+		return;
+	}
+	pc->Possess(holder->Robot1);
+
 }
 
 
 void ALab04Pawn::SelectPawn2()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Select Pawn 2"));
+
+	AController* pc = this->GetController();
+	if (pc == nullptr)
+	{
+		return;
+	}
+	pc->Possess(holder->Robot2);
+
 }
 
 
 void ALab04Pawn::SelectPawn3()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Select Pawn 3"));
+	AController* pc = this->GetController();
+	if (pc == nullptr)
+	{
+		return;
+	}
+	pc->Possess(holder->Robot3);
+
 }
 
 
 void ALab04Pawn::SelectSpawnedPawn()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Select Spawned Pawn "));
+
+
+	AController* pc = this->GetController();
+	if (pc == nullptr)
+	{
+		return;
+	}
+
+	if(holder->RobotSpawned != nullptr)
+	{ 
+	pc->Possess(holder->RobotSpawned);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Missing "));
+	}
 }

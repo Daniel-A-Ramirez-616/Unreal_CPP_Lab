@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "CPPLabCharacter.h"
+#include "RobotHolder.h"
 #include "Lab04Pawn.generated.h"
 
-/**
- * 
- */
+
+
 UCLASS()
 class CPPLAB_API ALab04Pawn : public ACPPLabCharacter
 {
@@ -41,6 +41,8 @@ protected:
 
 
 public:
+
+	ARobotHolder* holder;
 
 	/** Function to select pawn1 */
 	UFUNCTION(BlueprintCallable, Category = "Input")
