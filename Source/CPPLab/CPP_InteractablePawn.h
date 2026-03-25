@@ -17,5 +17,13 @@ class CPPLAB_API ACPP_InteractablePawn : public ACPPLabCharacter
 
 public:
 
+	/** Jump Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* InteractAction;
+
+	void PerformWorldTrace();
+protected:
+	/** Initialize input action bindings */
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 };
