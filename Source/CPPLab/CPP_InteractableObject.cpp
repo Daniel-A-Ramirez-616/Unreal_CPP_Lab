@@ -25,8 +25,3 @@ void ACPP_InteractableObject::Tick(float DeltaTime)
 
 }
 
-void OnUse()
-{
-
-}
-

@@ -6,6 +6,9 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "CPP_InteractableObject.h"
+#include "DrawDebugHelpers.h"
+
+
 
 void ACPP_InteractablePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -28,31 +31,43 @@ void ACPP_InteractablePawn::PerformWorldTrace()
 {
 	UE_LOG(LogTemplateCharacter, Warning, TEXT("PerformWorldTrace"));
 
-	  float LengthOfTrace = 300.f;
+	float LengthOfTrace = 1000.f;
+
+	FVector StartLocation;
+	FVector EndLocation;
+
 	
-  FVector StartLocation;
-  FVector EndLocation;
-  
-  StartLocation = FirstPersonCameraComponent->GetComponentLocation();
-  
-  EndLocation = StartLocation + 
-    (FirstPersonCameraComponent->GetForwardVector() * LengthOfTrace);
-	
-  FHitResult OutHitResult;
-  FCollisionQueryParams LineTraceParams;  
-   
-  bool bHitSomething = GetWorld()->LineTraceSingleByChannel(OutHitResult, 
-                       StartLocation, EndLocation, ECC_Visibility, LineTraceParams);
 
 
-  if (bHitSomething)
-  {
+	StartLocation = GetActorLocation(); 
 
-	  CPP_InteractableObject* CPP_InteractableObjectInstance = Cast<CPP_InteractableObject>(OutHitResult.GetActor());
+	EndLocation = StartLocation + (GetActorForwardVector()  * LengthOfTrace);
 
-	  if (CPP_InteractableObjectInstance)
-	  {
-		  CPP_InteractableObjectInstance->OnUse();
-	  }
-  }
+	FHitResult OutHitResult;
+	FCollisionQueryParams LineTraceParams;
+
+	bool bHitSomething = GetWorld()->LineTraceSingleByChannel(OutHitResult,
+		StartLocation, EndLocation, ECC_Visibility, LineTraceParams);
+
+	if (bHitSomething)
+	{
+
+		
+
+		ACPP_InteractableObject* IObject = Cast<ACPP_InteractableObject>(OutHitResult.GetActor());
+
+		if (IObject != nullptr)
+		{
+			DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false, 10.f, 0, 3.f);
+			IObject->OnUse();
+		}
+		else
+		{
+			DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Yellow, false, 10.f, 0, 3.f);
+		}
+	}
+	else
+	{
+		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, 10.f, 0, 3.f);
+	}
 }
