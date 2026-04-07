@@ -29,7 +29,7 @@ void ACPP_InteractablePawn::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 void ACPP_InteractablePawn::PerformWorldTrace()
 {
-	UE_LOG(LogTemplateCharacter, Warning, TEXT("PerformWorldTrace"));
+	//UE_LOG(LogTemplateCharacter, Warning, TEXT("PerformWorldTrace"));
 
 	float LengthOfTrace = 1000.f;
 
@@ -54,12 +54,12 @@ void ACPP_InteractablePawn::PerformWorldTrace()
 
 		
 
-		ACPP_InteractableObject* IObject = Cast<ACPP_InteractableObject>(OutHitResult.GetActor());
+		ACPP_InteractableObject* InteractObject = Cast<ACPP_InteractableObject>(OutHitResult.GetActor());
 
-		if (IObject != nullptr)
+		if (InteractObject != nullptr)
 		{
 			DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false, 10.f, 0, 3.f);
-			IObject->OnUse();
+			InteractObject->OnUse();
 		}
 		else
 		{

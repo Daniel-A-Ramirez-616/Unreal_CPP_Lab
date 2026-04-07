@@ -21,6 +21,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	UInputAction* InteractAction;
 
+	UFUNCTION(BlueprintCallable, Category = "Interact")
 	void PerformWorldTrace();
 protected:
 	/** Initialize input action bindings */
