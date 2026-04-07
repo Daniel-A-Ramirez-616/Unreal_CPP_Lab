@@ -41,7 +41,7 @@ void ACPP_InteractablePawn::PerformWorldTrace()
 
 	StartLocation = GetActorLocation(); 
 
-	EndLocation = StartLocation + (GetActorForwardVector()  * LengthOfTrace);
+	EndLocation = StartLocation + (GetActorForwardVector() * LengthOfTrace);
 
 	FHitResult OutHitResult;
 	FCollisionQueryParams LineTraceParams;
