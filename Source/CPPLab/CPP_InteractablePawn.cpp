@@ -59,6 +59,7 @@ void ACPP_InteractablePawn::PerformWorldTrace()
 		if (InteractObject != nullptr)
 		{
 			DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false, 10.f, 0, 3.f);
+			
 			InteractObject->OnUse();
 		}
 		else
